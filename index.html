@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty FTE Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="max-w-lg mx-auto bg-white shadow-md rounded-lg p-6">
+        <h2 class="text-2xl font-semibold mb-4 text-center">Faculty FTE Calculator</h2>
+
+        <div class="mb-4">
+            <label class="block font-medium mb-1">Stroke/Telestroke Shifts (12-hour)</label>
+            <input id="strokeShifts" type="number" value="0" class="w-full border rounded p-2">
+        </div>
+
+        <div class="mb-4">
+            <label class="block font-medium mb-1">Clinic (½ days per week)</label>
+            <input id="clinicDays" type="number" value="0" class="w-full border rounded p-2">
+        </div>
+
+        <div class="mb-4">
+            <label class="block font-medium mb-1">Inpatient Service (weeks per year)</label>
+            <input id="inpatientWeeks" type="number" value="0" class="w-full border rounded p-2">
+        </div>
+
+        <div class="mb-4">
+            <label class="block font-medium mb-1">Protected Time (%)</label>
+            <input id="protectedTime" type="number" value="0" class="w-full border rounded p-2">
+        </div>
+
+        <div class="mb-4">
+            <label class="block font-medium mb-1">Research Time (%)</label>
+            <input id="researchTime" type="number" value="0" class="w-full border rounded p-2">
+        </div>
+
+        <button onclick="calculateFTE()" class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition w-full">Calculate Total FTE</button>
+
+        <div id="result" class="mt-4 text-xl font-bold text-center"></div>
+    </div>
+
+    <script>
+        function calculateFTE() {
+            const strokeShifts = parseFloat(document.getElementById('strokeShifts').value) || 0;
+            const clinicDays = parseFloat(document.getElementById('clinicDays').value) || 0;
+            const inpatientWeeks = parseFloat(document.getElementById('inpatientWeeks').value) || 0;
+            const protectedTime = parseFloat(document.getElementById('protectedTime').value) || 0;
+            const researchTime = parseFloat(document.getElementById('researchTime').value) || 0;
+
+            const strokeFTE = (strokeShifts / 14) * 7;
+            const clinicFTE = clinicDays * 10;
+            const inpatientFTE = inpatientWeeks * 3;
+
+            const totalFTE = strokeFTE + clinicFTE + inpatientFTE + protectedTime + researchTime;
+
+            document.getElementById('result').innerHTML = `Total FTE: ${totalFTE.toFixed(2)}%`;
+        }
+    </script>
+</body>
+</html>
