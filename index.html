@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Faculty FTE Calculator</title>
+    <script>
+        function calculateFTE() {
+            const strokeShifts = parseFloat(document.getElementById('strokeShifts').value) || 0;
+            const clinicHalfDays = parseFloat(document.getElementById('clinicHalfDays').value) || 0;
+            const inpatientWeeks = parseFloat(document.getElementById('inpatientWeeks').value) || 0;
+            const siteAWeeks = parseFloat(document.getElementById('siteAWeeks').value) || 0;
+            const siteBWeeks = parseFloat(document.getElementById('siteBWeeks').value) || 0;
+            const protectedTime = parseFloat(document.getElementById('protectedTime').value) || 0;
+            const researchTime = parseFloat(document.getElementById('researchTime').value) || 0;
+
+            const strokeFTE = (strokeShifts / 14) * 7;
+            const clinicFTE = clinicHalfDays * 10;
+            const inpatientFTE = inpatientWeeks * 3;
+            const siteAFTE = siteAWeeks * 2.5;
+            const siteBFTE = siteBWeeks * 4;
+
+            const totalFTE = strokeFTE + clinicFTE + inpatientFTE + siteAFTE + siteBFTE + protectedTime + researchTime;
+
+            document.getElementById('result').innerText = "Total FTE: " + totalFTE.toFixed(2) + "%";
+        }
+    </script>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        input { padding: 5px; margin: 5px; }
+        button { padding: 8px 15px; margin-top: 10px; }
+        .notice {
+            max-width: 720px;
+            padding: 12px;
+            border: 1px solid #f59e0b;
+            background: #fffbeb;
+            color: #92400e;
+            border-radius: 6px;
+            margin-bottom: 16px;
+            line-height: 1.45;
+        }
+    </style>
+</head>
+<body>
+    <h2>Faculty FTE Calculator</h2>
+    <div class="notice">
+        Illustrative planning calculator only. This is not official finance, staffing,
+        compensation, credentialing, or effort-reporting guidance. Do not enter confidential staffing plans,
+        personnel records, or restricted data.
+    </div>
+    <label>Stroke/Telestroke Shifts (12-hour each): </label><br>
+    <input type="number" id="strokeShifts" placeholder="# shifts"><br>
+
+    <label>Clinic (½-days per week): </label><br>
+    <input type="number" id="clinicHalfDays" placeholder="# half-days"><br>
+
+    <label>Inpatient Service Weeks: </label><br>
+    <input type="number" id="inpatientWeeks" placeholder="# weeks"><br>
+
+    <label>Site A Inpatient Weeks: </label><br>
+    <input type="number" id="siteAWeeks" placeholder="# weeks"><br>
+
+    <label>Site B Inpatient Weeks: </label><br>
+    <input type="number" id="siteBWeeks" placeholder="# weeks"><br>
+
+    <label>Protected Time (%): </label><br>
+    <input type="number" id="protectedTime" placeholder="e.g., 20"><br>
+
+    <label>Research Time (%): </label><br>
+    <input type="number" id="researchTime" placeholder="e.g., 30"><br>
+
+    <button onclick="calculateFTE()">Calculate FTE</button>
+
+    <h3 id="result"></h3></body>
+</html>
